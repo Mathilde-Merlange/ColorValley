@@ -40,7 +40,7 @@ def main():
             
         
         delta_ms=clock.tick(fps)
-        i+=0.05n 
+        i+=0.05
         obst_cercle_surf=view.obst_cercle_surf(i)
         obst_cercle_rect=obst_cercle_surf.get_rect()
         obst_cercle_rect.x=275
