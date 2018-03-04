@@ -8,7 +8,7 @@ import model
 width=800
 height=600
 fps=30
-SPEED=30.0  
+SPEED=30.0
 B=(0,0,0)
 
 
@@ -40,7 +40,7 @@ def main():
             
         
         delta_ms=clock.tick(fps)
-        i+=0.05
+        i+=0.05n 
         obst_cercle_surf=view.obst_cercle_surf(i)
         obst_cercle_rect=obst_cercle_surf.get_rect()
         obst_cercle_rect.x=275
