@@ -2,33 +2,48 @@ import pygame
 from pygame.locals import *
 import math
 
-
-
-
-
-PURPLE=(140,19,251)
 RED=(255,0,128)
 BLUE=(53,226,242)
 YELLOW=(246,223,14)
-colors=[PURPLE,RED,BLUE,YELLOW]
+PURPLE=(140,19,251)
+N=(0,0,0)
+w=800
+h=600
+PI=math.pi
+x1=float(PI/2)
+y1=float(PI)
+x2=0.0
+x3=float(3*PI/2)
+y3=float(2*PI)
 
 
+	
+    
+def balle():
+    balle_surface=pygame.Surface((20,20))
+    balle_surface.fill(BLUE)
+    balle_surface.set_colorkey(BLUE)#transparence du surface
+    pygame.draw.circle(balle_surface,PURPLE,(10,10),10)
+    return balle_surface
 
-def obst_cercle_init(fenetre,i):
-	PI=math.pi
-	x1=PI/2
-	y1=PI
-	x2=0
-	x3=3*PI/2
-	y3=2*PI
-	r=20
-	pygame.draw.arc(fenetre,PURPLE, [187,150,250,200],x1+i,y1+i,r) #cercle 4 couleurs
-	pygame.draw.arc(fenetre,RED, [187,150,250,200], x2+i, x1+i,r)
-	pygame.draw.arc(fenetre, BLUE, [187,150,250,200], x3+i, y3+i, r)
-	pygame.draw.arc(fenetre, YELLOW, [187,150,250,200], y1+i, x3+i, r)
+def balle_rect():
+    balle_surface=balle()
+    balle_rect=balle_surface.get_rect()
+    balle_rect.center=(w/2,500)
+    return balle_rect
+
+def obst_cercle_surf(i):
+    arc_surface=pygame.Surface((250,250))
+    arc_surface.fill((N))
+    arc_surface.set_colorkey((N))
+    pygame.draw.arc(arc_surface,(RED),[0,0,250,250],x1+i,y1+i,10)
+    pygame.draw.arc(arc_surface,(PURPLE),[0,0,250,250],x2+i,x1+i,10)
+    pygame.draw.arc(arc_surface,(BLUE),[0,0,250,250],x3+i,y3+i,10)
+    pygame.draw.arc(arc_surface,(YELLOW),[0,0,250,250],y1+i,x3+i,10)
+
+    return arc_surface
+
+	
 
 
-
-
-def balle(fenetre):
-	pygame.draw.circle(fenetre,(PURPLE),[320,400],10,0) # balle
+ 

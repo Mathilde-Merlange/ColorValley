@@ -34,6 +34,8 @@ pygame.init()
 fenetre=pygame.display.set_mode((640,480))
 pygame.display.set_caption("Color Valley")
 
+a=320
+b=400
 
 #def collision(balle,obj):
 
@@ -44,8 +46,9 @@ while continuer:
 	for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
 		if event.type == QUIT:     #Si un de ces événements est de type QUIT
 			continuer = 0      #On arrête la boucle
-	
-	
+		if event.type== MOUSEBUTTONDOWN:
+			b+= 10
+
 	x1+=1
 	y1+=1
 	x2+=1
@@ -59,12 +62,11 @@ while continuer:
 	pygame.draw.arc(fenetre, YELLOW, [187,150,250,200], y1, x3, r)
 	pygame.time.wait(350) # vitesse rotation
 
-	balle=pygame.draw.circle(fenetre,WHITE,[320,400],15,0)
+	pygame.draw.circle(fenetre,WHITE,[a,b],15,0)
 	barre_score=pygame.draw.line(fenetre,BLACK,(310,470),(310,460),200)
 	chg_color=pygame.draw.circle(fenetre,ORANGE,[320,100],20,0)
-
-
-	pygame.display.flip()
+	
+	
 
 	
 pygame.quit()			
