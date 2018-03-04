@@ -6,4 +6,4 @@ def saut_balle(balle_rect,y):
 	balle_rect.y=y
 
 	return balle_rect
-         
+          

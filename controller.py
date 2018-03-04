@@ -8,7 +8,7 @@ import model
 width=800
 height=600
 fps=30
-SPEED=30.0
+SPEED=30.0  
 B=(0,0,0)
 
 
