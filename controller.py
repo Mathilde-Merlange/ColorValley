@@ -5,19 +5,25 @@ import view
 import model
 
 
+score=0
 width=800
 height=600
 fps=30
 SPEED=30.0
 B=(0,0,0)
 
+RED=(255,0,128)
+color1=RED
+
+
+
 
 def init_balle():
         global balle_surface
         global balle_rect
-        balle_surface=view.balle()
+        balle_surface=view.balle(color1)
         balle_rect=view.balle_rect()
-        view.balle()
+        view.balle(color1)
 
 
 
@@ -37,7 +43,7 @@ def main():
     #obst_cercle_rect=view.obst_cercle_rect()
     i=0.0
     while running==True:
-            
+           
         
         delta_ms=clock.tick(fps)
         i+=0.05
@@ -45,6 +51,8 @@ def main():
         obst_cercle_rect=obst_cercle_surf.get_rect()
         obst_cercle_rect.x=275
         obst_cercle_rect.y=150
+        
+        obst_carre=view.obst_carre()
         
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
