@@ -25,7 +25,11 @@ def coll_color(balle,chg_color):
 	if (collision(balle,chg_color)):
 		view.newColor()
 		
-	
+def coll_cercle(balle,cercle):
+	if (collision(balle,cercle)):
+		print("collision cercle")
+	else:
+		print("rien touché")
 		
 def score_add():
 	score+=1		

@@ -8,9 +8,10 @@ import model
 score=0
 width=800
 height=600
-fps=30
+fps=20
 SPEED=30.0
 B=(0,0,0)
+continuer=1
 
 RED=(255,0,128)
 color1=RED
@@ -43,7 +44,7 @@ def main():
     #obst_cercle_rect=view.obst_cercle_rect()
     i=0.0
     while running==True:
-           
+		
         
         delta_ms=clock.tick(fps)
         i+=0.05
@@ -51,9 +52,7 @@ def main():
         obst_cercle_rect=obst_cercle_surf.get_rect()
         obst_cercle_rect.x=275
         obst_cercle_rect.y=150
-        
-        obst_carre=view.obst_carre()
-        
+        model.coll_cercle(balle_rect,obst_cercle_rect)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running=False
@@ -66,7 +65,7 @@ def main():
             if event.type==pygame.MOUSEBUTTONDOWN:
                 y-=30
                 balle_rect.y=y
-       
+
         #action_render(screen)
         screen.fill(B)
         screen.blit(obst_cercle_surf,obst_cercle_rect)
@@ -76,10 +75,7 @@ def main():
         	balle_rect.y=y
 
         pygame.display.flip()
-
-
-
-       
+		
 
     pygame.quit()
     exit()
