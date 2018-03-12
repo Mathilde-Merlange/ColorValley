@@ -25,7 +25,7 @@ def newColor(): #DOES NOT WORK
 	color1=colors[rd]
 	balle()		
     
-def balle(color1):
+def balle():
     balle_surface=pygame.Surface((20,20))
     balle_surface.fill(BLUE)
     balle_surface.set_colorkey(BLUE)#transparence du surface
@@ -33,7 +33,7 @@ def balle(color1):
     return balle_surface
 
 def balle_rect():
-    balle_surface=balle(color1)
+    balle_surface=balle()
     balle_rect=balle_surface.get_rect()
     balle_rect.center=(w/2,500)
     return balle_rect

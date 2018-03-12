@@ -14,7 +14,6 @@ B=(0,0,0)
 continuer=1
 
 RED=(255,0,128)
-color1=RED
 
 
 
@@ -22,9 +21,9 @@ color1=RED
 def init_balle():
         global balle_surface
         global balle_rect
-        balle_surface=view.balle(color1)
+        balle_surface=view.balle()
         balle_rect=view.balle_rect()
-        view.balle(color1)
+        view.balle()
 
 
 
@@ -75,7 +74,7 @@ def main():
         	balle_rect.y=y
 
         pygame.display.flip()
-		
+	
 
     pygame.quit()
     exit()
