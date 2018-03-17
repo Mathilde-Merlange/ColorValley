@@ -3,10 +3,10 @@ from sys import exit
 import time
 import view
 import model
-
+import math
 
 score=0
-width=800
+width=400
 height=600
 fps=20
 SPEED=30.0
@@ -26,27 +26,38 @@ def action_render(screen):
 
 
 
-def init_balle():
+def init_balle(color_init):
         global balle_surface
         global balle_rect
         balle_surface=view.balle()
         balle_rect=view.balle_rect()
-        view.balle()
+        view.draw_balle(balle_surface,color_init)
 
 def update_obst_cercle():
         global obst_cercle_surf
         global obst_cercle_rect
         obst_cercle_surf=view.obst_cercle_surf()
         obst_cercle_rect=obst_cercle_surf.get_rect()
-        obst_cercle_rect.x=275 
-        obst_cercle_rect.y=120
+        obst_cercle_rect.x=125
+        obst_cercle_rect.y=225
+
+
+def obst_carre(angle,surface,x,y):
+    global rotated_surface
+    global rect
+    
+    rotated_surface = pygame.transform.rotate(surface, angle)
+    rect = rotated_surface.get_rect()
+    rect.center=(x,y)
+    
+
+
 
 
 def pos_max_balle(y,y_max):
     if(y<y_max):
         y_max=y
     return y_max
-
 
 
 
@@ -57,29 +68,35 @@ def main():
     pygame.display.set_caption('Color Valley')
 
     clock=pygame.time.Clock()
-    x=400
+    x=150
     y=500
     y_init=500
     y_max=500
-    init_balle()
-    update_obst_cercle()
     i=0.0
-    
+    color_init=model.newColor()
+    init_balle(color_init)
+    surface =view.obst_carre()
+    angle = 0
+    carre_grav=0
+    update_obst_cercle()
     while running==True:
 		
         
         delta_ms=clock.tick(fps)
-        i+=0.05
-<<<<<<< HEAD
-        view.draw_obst_cercle(obst_cercle_surf,i)
         
-=======
-        obst_cercle_surf=view.obst_cercle_surf(i)
-        obst_cercle_rect=obst_cercle_surf.get_rect()
-        obst_cercle_rect.x=275
-        obst_cercle_rect.y=150
-        model.coll_cercle(balle_rect,obst_cercle_rect)
->>>>>>> 15b52778180d41cecd303e329e0dfd79adaa07f6
+        
+        if(i>math.radians(360)):
+            i=0.0
+        else:
+            i+=math.radians(2)
+        
+        view.draw_obst_cercle(obst_cercle_surf,i)
+        coul_cercle_bas= model.couleur_arc_bas(i)
+        coul_cercle_haut=model.couleur_arc_haut(i)
+        
+        balle_cercle_coll=model.coll_cercle(balle_rect,obst_cercle_rect,coul_cercle_bas,color_init)
+        
+
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running=False
@@ -92,29 +109,30 @@ def main():
             if event.type==pygame.MOUSEBUTTONDOWN:
                 y-=30
                 balle_rect.y=y
-<<<<<<< HEAD
+                if(y<=300):
+                    obst_cercle_rect.y+=10
+                    carre_grav+=10
+                   
                 pos_max_balle(y,y_max)
 
        
-        action_render(screen)
-        if(y<=250):
-            obst_cercle_rect.y+=1
-
-
         
         y=model.ball_gravity(y,y_init)
-        balle_rect.y=y
-        
-=======
 
-        #action_render(screen)
-        screen.fill(B)
-        screen.blit(obst_cercle_surf,obst_cercle_rect)
-        screen.blit(balle_surface,balle_rect)
+        balle_rect.y=y
+        angle+=2
+        obst_carre(angle,surface,190,carre_grav)
+        
+
+
+        action_render(screen)
+        screen.blit(rotated_surface, (rect.x, rect.y))
+        
+
         if(y<=y_init):
         	y+=2
         	balle_rect.y=y
->>>>>>> 15b52778180d41cecd303e329e0dfd79adaa07f6
+
 
         pygame.display.flip()
 	
