@@ -78,7 +78,10 @@ def draw_obst_cercle(arc_surface,i):
     
 
     
-    
+def cercle_change_color():
+    pie=pygame.image.load("pie_circle.png")
+    pie=pie.convert_alpha()
+    return pie
 
 
 def obst_carre():

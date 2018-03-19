@@ -8,7 +8,7 @@ RED=(255,0,128)
 BLUE=(53,226,242)
 YELLOW=(246,223,14)
 PURPLE=(140,19,251)
-
+BLACK=(0,0,0)
 
 
 
@@ -16,6 +16,11 @@ def ball_gravity(y,y_init):
     if(y<=y_init):
             y+=2
     return y
+
+
+def update_ball(surface):
+    color=newColor()
+    view.draw_balle(surface,color)
 
 def couleur_arc_bas(i):
 
@@ -72,24 +77,25 @@ def couleur_arc_haut(i):
     x_P+=i
     y_P+=i
     if (y_P>math.radians(90)) and (x_P <math.radians(90)):
-        print ("PURPLE")
+        
+        #print ("PURPLE")
         #return PURPLE 
-    x_R+=i
-    y_R+=i
+        x_R+=i
+        y_R+=i
     
     if (y_R>col_haut) and (x_R <col_haut):
-        print("RED")
+        #print("RED")
         #return RED 
 
-    x_Y+=i    
-    y_Y+=i
+         x_Y+=i    
+         y_Y+=i
     
     if (y_Y>col_haut) and (x_Y <col_haut):
-        print("YELLOW")
+        #print("YELLOW")
         #return YELLOW
 
-    x_B+=i
-    y_B+=i
+        x_B+=i
+        y_B+=i
     if (y_B>col_haut) and (x_B <col_haut):
         print("BLUE")
         #return BLUE
@@ -112,10 +118,7 @@ def collision(rectA, rectB):
     # Dans tous les autres cas il y a collision
     return True
 	
-def coll_score(balle,barre_score):
-	if (collision(balle,barre_score)):
-		score=score_add()
-		
+
 #def coll_color(balle,chg_color):
 	#if (collision(balle,chg_color)):
 		#view.newColor()
@@ -127,8 +130,9 @@ def coll_cercle(balle,cercle,couleur_arc,colorBall):
     else :
         return False
 		
-def score_add():
-	score+=1	
+def score_add(score):
+    score+=1
+    	
 
 def newColor():
     colors=[RED,BLUE,YELLOW,PURPLE]
@@ -136,7 +140,66 @@ def newColor():
     return color1	
 
 
+def rotate_cercle(i,obst_cercle_surf):
+    if(i>math.radians(360)):
+            i=0.0
+    else:
+            i+=math.radians(2)
+        
+    view.draw_obst_cercle(obst_cercle_surf,i)
+    return i
+
+def rotate_carre(i):
+    if (i>360):
+        i=0
+    else:
+          i+=2
+    return i
+
+def coll_pie(balle_surf,balle,pie,score):
+   if (collision(balle,pie)):
+    pie.y=-150
+    update_ball(balle_surf)
+    score_add(score)
+    
+   return pie.y
 
 
+#def couleur_carre(i):
+    #col_bas=90
+    #x_R=
+    #y_R=
+    #x_Y=
+    #y_Y=
+    #x_B=
+    #y_B=
+    #x_P=
+    #y_P=
 
     
+        
+    #x_R+=i
+    #y_R+=i
+    
+    ##if (y_R>col_haut) and (x_R <col_haut):
+        #print("RED")
+        #return RED 
+
+         #x_Y+=i    
+         #y_Y+=i
+    
+    #if (y_Y>col_haut) and (x_Y <col_haut):
+        #print("YELLOW")
+        #return YELLOW
+
+        #x_B+=i
+        #y_B+=i
+    #if (y_B>col_haut) and (x_B <col_haut):
+        #print("BLUE")
+        #return BLUE
+
+    #x_P+=i
+    #y_P+=i
+    #if (y_P>math.radians(90)) and (x_P <math.radians(90)):
+        #print ("PURPLE")
+        #return PURPLE 

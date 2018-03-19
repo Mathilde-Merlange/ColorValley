@@ -23,7 +23,7 @@ def action_render(screen):
     screen.fill(B)
     screen.blit(obst_cercle_surf,obst_cercle_rect)
     screen.blit(balle_surface,balle_rect)
-
+    screen.blit(pie,rect_pie)
 
 
 def init_balle(color_init):
@@ -33,7 +33,7 @@ def init_balle(color_init):
         balle_rect=view.balle_rect()
         view.draw_balle(balle_surface,color_init)
 
-def update_obst_cercle():
+def obst_cercle():
         global obst_cercle_surf
         global obst_cercle_rect
         obst_cercle_surf=view.obst_cercle_surf()
@@ -42,15 +42,24 @@ def update_obst_cercle():
         obst_cercle_rect.y=225
 
 
-def obst_carre(angle,surface,x,y):
-    global rotated_surface
-    global rect
-    
-    rotated_surface = pygame.transform.rotate(surface, angle)
-    rect = rotated_surface.get_rect()
-    rect.center=(x,y)
-    
 
+def obst_carre(angle,x,y):
+    global rect_carre
+    global rotated_surface
+    surface=view.obst_carre()
+    rotated_surface = pygame.transform.rotate(surface, angle)
+    rect_carre = rotated_surface.get_rect()
+    rect_carre.center=(x,y)
+    return rect_carre
+
+    
+def cercle_change_color():
+    global pie 
+    global rect_pie
+    pie=view.cercle_change_color()
+    rect_pie=pie.get_rect()
+    rect_pie.center=(200,100)
+    
 
 
 
@@ -61,6 +70,7 @@ def pos_max_balle(y,y_max):
 
 
 
+
 def main():
     pygame.init()
     running=True
@@ -68,35 +78,26 @@ def main():
     pygame.display.set_caption('Color Valley')
 
     clock=pygame.time.Clock()
-    x=150
+    #x=150
     y=500
     y_init=500
     y_max=500
     i=0.0
     color_init=model.newColor()
     init_balle(color_init)
-    surface =view.obst_carre()
+    cercle_change_color()
+   
     angle = 0
-    carre_grav=0
-    update_obst_cercle()
+    carre_grav=-125
+    obst_cercle()
+    score=0
+
+
     while running==True:
 		
         
         delta_ms=clock.tick(fps)
         
-        
-        if(i>math.radians(360)):
-            i=0.0
-        else:
-            i+=math.radians(2)
-        
-        view.draw_obst_cercle(obst_cercle_surf,i)
-        coul_cercle_bas= model.couleur_arc_bas(i)
-        coul_cercle_haut=model.couleur_arc_haut(i)
-        
-        balle_cercle_coll=model.coll_cercle(balle_rect,obst_cercle_rect,coul_cercle_bas,color_init)
-        
-
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running=False
@@ -109,29 +110,49 @@ def main():
             if event.type==pygame.MOUSEBUTTONDOWN:
                 y-=30
                 balle_rect.y=y
-                if(y<=300):
-                    obst_cercle_rect.y+=10
-                    carre_grav+=10
+                if(y<=350):
+                    if (obst_cercle_rect.y>=600):
+                        obst_cercle_rect.y=-125
+                    else: 
+                        obst_cercle_rect.y+=20
+
+                    if (carre_grav>=600):
+                        carre_grav=-125
+                    else:
+                        carre_grav+=20
+                    
+                    rect_pie.y+=20
                    
+                    
                 pos_max_balle(y,y_max)
 
        
         
-        y=model.ball_gravity(y,y_init)
 
+        y=model.ball_gravity(y,y_init)
         balle_rect.y=y
-        angle+=2
-        obst_carre(angle,surface,190,carre_grav)
+        
+        
+        angle=model.rotate_carre(angle)
+        rect_carre=obst_carre(angle,190,carre_grav)
+        
+
+        
+        i=model.rotate_cercle(i,obst_cercle_surf)
+        coul_cercle_bas= model.couleur_arc_bas(i)
+        coul_cercle_haut=model.couleur_arc_haut(i)
+        
+        balle_cercle_coll=model.coll_cercle(balle_rect,obst_cercle_rect,coul_cercle_bas,color_init)
+        rect_pie.y=model.coll_pie(balle_surface,balle_rect,rect_pie,score)
         
 
 
         action_render(screen)
-        screen.blit(rotated_surface, (rect.x, rect.y))
+        
+        screen.blit(rotated_surface, (rect_carre.x, rect_carre.y))
         
 
-        if(y<=y_init):
-        	y+=2
-        	balle_rect.y=y
+    
 
 
         pygame.display.flip()
