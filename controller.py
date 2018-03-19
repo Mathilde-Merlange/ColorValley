@@ -133,7 +133,8 @@ def main():
         balle_rect.y=y
         
         
-        angle=model.rotate_carre(angle)
+        angle=model.rotate_carre(angle)  #rotation 360 du carre
+        model.couleur_carre(angle)
         rect_carre=obst_carre(angle,190,carre_grav)
         
 

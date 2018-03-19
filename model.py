@@ -77,28 +77,27 @@ def couleur_arc_haut(i):
     x_P+=i
     y_P+=i
     if (y_P>math.radians(90)) and (x_P <math.radians(90)):
-        
-        #print ("PURPLE")
-        #return PURPLE 
-        x_R+=i
-        y_R+=i
+        return PURPLE 
+
+
+
+    x_R+=i
+    y_R+=i
     
     if (y_R>col_haut) and (x_R <col_haut):
-        #print("RED")
-        #return RED 
+        return RED 
 
-         x_Y+=i    
-         y_Y+=i
+
+    x_Y+=i    
+    y_Y+=i
     
     if (y_Y>col_haut) and (x_Y <col_haut):
-        #print("YELLOW")
-        #return YELLOW
+        return YELLOW
 
-        x_B+=i
-        y_B+=i
+    x_B+=i
+    y_B+=i
     if (y_B>col_haut) and (x_B <col_haut):
-        print("BLUE")
-        #return BLUE
+        return BLUE
 
 
 
@@ -125,7 +124,7 @@ def collision(rectA, rectB):
 		
 def coll_cercle(balle,cercle,couleur_arc,colorBall):
     if (collision(balle,cercle) and (colorBall==couleur_arc)):
-        print("collision cercle")
+        #print("collision cercle")
         return True
     else :
         return False
@@ -165,41 +164,67 @@ def coll_pie(balle_surf,balle,pie,score):
    return pie.y
 
 
-#def couleur_carre(i):
-    #col_bas=90
-    #x_R=
-    #y_R=
-    #x_Y=
-    #y_Y=
-    #x_B=
-    #y_B=
-    #x_P=
-    #y_P=
+def couleur_carre(i):
+    col_bas=135
+    x_P=0
+    y_P=90
+    x_B=90
+    y_B=180
+    x_Y=180
+    y_Y=270
+    x_R=270
+    y_R=360
 
     
+
+
+
+    if(x_P>=360):
+        x_P=0
+
+    if(y_P>=360):
+        y_P=0
+
+    x_P+=i
+    y_P+=i
+    if (y_P>col_bas) and (x_P <col_bas):
         
-    #x_R+=i
-    #y_R+=i
+        print ("PURPLE")
+
+    if(x_B>=360):
+        x_B=0
+
+    if(y_B>=360):
+        y_B=0
+
+
+    x_B+=i
+    y_B+=i
+    if (y_B>col_bas) and (x_B <col_bas):
+        print("BLUE")
+
+
+    if(x_Y>360):
+        x_Y=0
+
+    if(y_Y>360):
+        y_Y=0
+
+    x_Y+=i    
+    y_Y+=i
     
-    ##if (y_R>col_haut) and (x_R <col_haut):
-        #print("RED")
-        #return RED 
+    if (y_Y>col_bas) and (x_Y <col_bas):
+        print("YELLOW")
 
-         #x_Y+=i    
-         #y_Y+=i
+
+    if(x_R>360):
+        x_R=0
+
+    if(y_R>360):
+        y_R=0
+
+    x_R+=i
+    y_R+=i
     
-    #if (y_Y>col_haut) and (x_Y <col_haut):
-        #print("YELLOW")
-        #return YELLOW
-
-        #x_B+=i
-        #y_B+=i
-    #if (y_B>col_haut) and (x_B <col_haut):
-        #print("BLUE")
-        #return BLUE
-
-    #x_P+=i
-    #y_P+=i
-    #if (y_P>math.radians(90)) and (x_P <math.radians(90)):
-        #print ("PURPLE")
-        #return PURPLE 
+    if (y_R>col_bas) and (x_R <col_bas):
+        print("RED")
