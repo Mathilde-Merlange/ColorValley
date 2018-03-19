@@ -11,6 +11,7 @@ height=600
 fps=20
 SPEED=30.0
 B=(0,0,0)
+W=(255,25,255)
 continuer=1
 
 RED=(255,0,128)
@@ -71,8 +72,8 @@ def pos_max_balle(y,y_max):
 
 
 
-def main():
-    pygame.init()
+def jeu():
+    
     running=True
     screen=pygame.display.set_mode((width,height))
     pygame.display.set_caption('Color Valley')
@@ -156,12 +157,78 @@ def main():
 
 
         pygame.display.flip()
-	
 
-    pygame.quit()
-    exit()
     
-    return 0
+    
+def menu():
+	pygame.init()
+	screen=pygame.display.set_mode((width,height))
+	pygame.display.set_caption('Color Valley')
+	font=pygame.font.Font(None,40)
+	
+	menu=font.render("Color Valley",1,(0,100,255))
+	boutonJouer=font.render("Jouer",1,(0,100,255))
+	boutonQuitter=font.render("Quitter",1,(0,100,255))
+	
+	intro=True
+	while intro:
+		for event in pygame.event.get():
+			if event.type==pygame.QUIT:
+				intro=False
+		
+		screen.blit(menu,(120,100,400,200))
+		screen.blit(boutonJouer,(160,210,200,230))
+		screen.blit(boutonQuitter,(155,300,200,320))
+		pygame.display.flip()
+		
+	mouse = pygame.mouse.get_pos()
+	click = pygame.mouse.get_pressed()
+	
+	
+		
+	
+	
+	pygame.quit()
+    
+    
+def game_over():
+	pygame.init()
+	screen=pygame.display.set_mode((width,height))
+	pygame.display.set_caption('Color Valley')
+	font=pygame.font.Font(None,40)	
+	game=font.render("Game Over",1,(255,0,0))
+	scoreAff=font.render("Score : ",1,(255,255,255))
+	scoreF=str(score) #int to string
+	scoreFinal=font.render(scoreF,1,(255,255,255))
+	boutonMenu=font.render("Menu",1,(0,100,255))
+	
+	end=True
+	while end:
+		for event in pygame.event.get():
+			if event.type==pygame.QUIT:
+				end=False
+		
+		screen.blit(game,(120,50,400,200))
+		screen.blit(scoreAff,(100,250,200,400))
+		screen.blit(scoreFinal,(250,250,400,400))
+		screen.blit(boutonMenu,(150,500,300,600))
+		pygame.display.flip()
+		
+	mouse = pygame.mouse.get_pos()
+	click = pygame.mouse.get_pressed()
+	
+	pygame.quit()
+	
+	
+	
+	
+		
+   
+    
+    
+def main():
+	menu()   
+    
 
 if __name__ == '__main__':
     main()
