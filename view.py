@@ -96,7 +96,16 @@ def obst_carre():
 
     return carre_surf
 
-    
+def play():
+    play=pygame.image.load("play.png")
+    play=play.convert_alpha()
+    return play
+
+def retry():
+    retry=pygame.image.load("retry.png")
+    retry=retry.convert_alpha()
+    return retry
+
     
 
 

@@ -59,8 +59,7 @@ def cercle_change_color():
     global rect_pie
     pie=view.cercle_change_color()
     rect_pie=pie.get_rect()
-    rect_pie.center=(200,100)
-    
+    rect_pie.center=(200,125)
 
 
 
@@ -79,7 +78,7 @@ def jeu():
     pygame.display.set_caption('Color Valley')
 
     clock=pygame.time.Clock()
-    #x=150
+    
     y=500
     y_init=500
     y_max=500
@@ -95,7 +94,7 @@ def jeu():
 
 
     while running==True:
-		
+        
         
         delta_ms=clock.tick(fps)
         
@@ -108,21 +107,21 @@ def jeu():
                     running=False
 
 
-            if event.type==pygame.MOUSEBUTTONDOWN:
+            if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
                 y-=30
                 balle_rect.y=y
                 if(y<=350):
                     if (obst_cercle_rect.y>=600):
                         obst_cercle_rect.y=-125
                     else: 
-                        obst_cercle_rect.y+=20
+                        obst_cercle_rect.y+=30
 
                     if (carre_grav>=600):
                         carre_grav=-125
                     else:
-                        carre_grav+=20
+                        carre_grav+=30
                     
-                    rect_pie.y+=20
+                    rect_pie.y+=30
                    
                     
                 pos_max_balle(y,y_max)
@@ -134,21 +133,30 @@ def jeu():
         balle_rect.y=y
         
         
-        angle=model.rotate_carre(angle)  #rotation 360 du carre
-        model.couleur_carre(angle)
-        rect_carre=obst_carre(angle,190,carre_grav)
-        
+        if(model.collision(balle_rect,rect_pie)):
+            color_init=model.update_ball(balle_surface)
+            score=model.score_add(score)
+            rect_pie.y=-125
 
-        
+
         i=model.rotate_cercle(i,obst_cercle_surf)
         coul_cercle_bas= model.couleur_arc_bas(i)
         coul_cercle_haut=model.couleur_arc_haut(i)
         
-        balle_cercle_coll=model.coll_cercle(balle_rect,obst_cercle_rect,coul_cercle_bas,color_init)
-        rect_pie.y=model.coll_pie(balle_surface,balle_rect,rect_pie,score)
+        balle_cercle_coll_bas=model.coll_balle_obs_bas(balle_rect,obst_cercle_rect,coul_cercle_bas,color_init)
+        balle_cercle_coll_haut=model.coll_balle_obs_haut(balle_rect,obst_cercle_rect,coul_cercle_haut,color_init)
         
-
-
+        angle=model.rotate_carre(angle)  #rotation 360 du carre
+        coul_carre_bas=model.couleur_carre_bas(angle)
+        coul_carre_haut=model.couleur_carre_haut(angle)
+        rect_carre=obst_carre(angle,190,carre_grav)
+        balle_carre_coll_bas=model.coll_balle_obs_bas(balle_rect,rect_carre,coul_carre_bas,color_init)
+        balle_carre_coll_haut=model.coll_balle_obs_haut(balle_rect,rect_carre,coul_carre_haut,color_init)
+        
+        if( balle_cercle_coll_bas!=True or balle_cercle_coll_haut !=True or balle_carre_coll_haut !=True or balle_carre_coll_bas!=True):
+            game_over(score)
+        
+        
         action_render(screen)
         
         screen.blit(rotated_surface, (rect_carre.x, rect_carre.y))
@@ -159,76 +167,84 @@ def jeu():
 
         pygame.display.flip()
 
-    
+   
     
 def menu():
-	pygame.init()
-	screen=pygame.display.set_mode((width,height))
-	pygame.display.set_caption('Color Valley')
-	font=pygame.font.Font(None,40)
-	
-	menu=font.render("Color Valley",1,(0,100,255))
-	boutonJouer=font.render("Jouer",1,(0,100,255))
-	boutonQuitter=font.render("Quitter",1,(0,100,255))
-	
-	intro=True
-	while intro:
-		for event in pygame.event.get():
-			if event.type==pygame.QUIT:
-				intro=False
-		
-		screen.blit(menu,(120,100,400,200))
-		screen.blit(boutonJouer,(160,210,200,230))
-		screen.blit(boutonQuitter,(155,300,200,320))
-		pygame.display.flip()
-		
-	mouse = pygame.mouse.get_pos()
-	click = pygame.mouse.get_pressed()
-	
-	
-		
-	
-	
-	pygame.quit()
+    pygame.init()
+    screen=pygame.display.set_mode((width,height))
+    pygame.display.set_caption('Color Valley')
+    font=pygame.font.Font(None,40)
+    
+    menu=font.render("Color Valley",1,(0,100,255))
+    
+    play_button=view.play()
+
     
     
-def game_over():
-	pygame.init()
-	screen=pygame.display.set_mode((width,height))
-	pygame.display.set_caption('Color Valley')
-	font=pygame.font.Font(None,40)	
-	game=font.render("Game Over",1,(255,0,0))
-	scoreAff=font.render("Score : ",1,(255,255,255))
-	scoreF=str(score) #int to string
-	scoreFinal=font.render(scoreF,1,(255,255,255))
-	boutonMenu=font.render("Menu",1,(0,100,255))
-	
-	end=True
-	while end:
-		for event in pygame.event.get():
-			if event.type==pygame.QUIT:
-				end=False
-		
-		screen.blit(game,(120,50,400,200))
-		screen.blit(scoreAff,(100,250,200,400))
-		screen.blit(scoreFinal,(250,250,400,400))
-		screen.blit(boutonMenu,(150,500,300,600))
-		pygame.display.flip()
-		
-	mouse = pygame.mouse.get_pos()
-	click = pygame.mouse.get_pressed()
-	
-	pygame.quit()
-	
-	
-	
-	
-		
+    intro=True
+    while intro:
+
+        screen.blit(menu,(120,100,400,200))
+        b=screen.blit(play_button,(136,236))
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                intro=False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button==1:
+                pos=pygame.mouse.get_pos()
+                if b.collidepoint(pos):
+                    jeu()
+        
+        
+        pygame.display.flip()
+        
+    pygame.quit()
+    
+    
+def game_over(score):
+    pygame.init()
+    screen=pygame.display.set_mode((width,height))
+    pygame.display.set_caption('Color Valley')
+    font=pygame.font.Font(None,40)  
+    game=font.render("GAME",5,(255,0,128))
+    over=font.render("OVER",5,(53,226,242))
+    scoreAff=font.render("Score : ",1,(255,255,255))
+    scoreF=str(score) #int to string
+    scoreFinal=font.render(scoreF,1,(255,255,255))
+    retry=view.retry()
+    
+    end=True
+    while end:
+        r=screen.blit(retry, (136,410))
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                end=False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button==1:
+                pos=pygame.mouse.get_pos()
+                if r.collidepoint(pos):
+                        jeu()
+
+        
+        screen.blit(game,(150,150,400,200))
+        screen.blit(over,(155,180,400,210))
+        screen.blit(scoreAff,(100,250,200,400))
+        screen.blit(scoreFinal,(250,250,400,400))
+        
+        pygame.display.flip()
+        
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    
+    pygame.quit()
+    
+    
+    
+    
+        
    
     
     
 def main():
-	menu()   
+    menu()   
     
 
 if __name__ == '__main__':
