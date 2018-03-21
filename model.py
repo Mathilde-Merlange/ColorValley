@@ -14,7 +14,7 @@ BLACK=(0,0,0)
 
 def ball_gravity(y,y_init):
     if(y<=y_init):
-            y+=3
+            y+=5
     return y
 
 

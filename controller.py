@@ -108,7 +108,7 @@ def jeu():
 
 
             if event.type==pygame.MOUSEBUTTONDOWN and event.button==1:
-                y-=30
+                y-=40
                 balle_rect.y=y
                 if(y<=350):
                     if (obst_cercle_rect.y>=600):
