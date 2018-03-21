@@ -26,8 +26,9 @@ def update_ball(surface):
 
 def newColor():
     colors=[BLUE,RED,YELLOW,PURPLE]
-    
-    return random.choice(colors)
+    c1=random.choice(colors)
+    print ("couleur balle = ",c1)
+    return c1
 
 def couleur_arc_bas(i):
 
@@ -58,24 +59,24 @@ def couleur_arc_bas(i):
     
 
     if (y_P>col_bas) and (x_P <col_bas):
-        #print ("PURPLE")
+        #print ("PURPLE	   b")
         return PURPLE 
     
     
     if (y_R>col_bas) and (x_R <col_bas):
-        #print("RED")
+        #print("RED	   b")
         return RED 
 
     
     
     if (y_Y>col_bas) and (x_Y <col_bas):
-        #print("YELLOW")
+        #print("YELLOW	   b")
         return YELLOW
 
     
     
     if (y_B>math.radians(630)) and (x_B <math.radians(630)):
-        #print("BLUE")
+        #print("BLUE	   b")
         return BLUE
     
 
@@ -95,7 +96,7 @@ def couleur_arc_haut(i):
     x_P+=i
     y_P+=i
     if (y_P>math.radians(90)) and (x_P <math.radians(90)):
-        #print("PURPLE")
+        #print("PURPLE	h")
         return PURPLE 
 
 
@@ -104,7 +105,7 @@ def couleur_arc_haut(i):
     y_R+=i
     
     if (y_R>col_haut) and (x_R <col_haut):
-        #print("RED")
+        #print("RED	h")
         return RED 
 
 
@@ -112,14 +113,14 @@ def couleur_arc_haut(i):
     y_Y+=i
     
     if (y_Y>col_haut) and (x_Y <col_haut):
-        #print("YELLOW")
+        #print("YELLOW	h")
         return YELLOW
 
     x_B+=i
     y_B+=i
 
     if (y_B>col_haut) and (x_B <col_haut):
-        #print("BLUE")
+        #print("BLUE	h")
 
         return BLUE
     

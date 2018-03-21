@@ -22,8 +22,8 @@ arc_surface=list
     
 def balle():
     balle_surface=pygame.Surface((20,20))
-    balle_surface.fill(BLUE)
-    balle_surface.set_colorkey(BLUE)#transparence du surface
+    balle_surface.fill(N)
+    balle_surface.set_colorkey(N)#transparence du surface
     return balle_surface
 
 def draw_balle(balle_surface,color):

@@ -4,6 +4,7 @@ import time
 import view
 import model
 import math
+import sys
 
 score=0
 width=400
@@ -101,6 +102,7 @@ def jeu():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running=False
+                sys.exit()
 
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_ESCAPE:
@@ -189,6 +191,8 @@ def menu():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 intro=False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button==1:
                 pos=pygame.mouse.get_pos()
                 if b.collidepoint(pos):
@@ -197,11 +201,10 @@ def menu():
         
         pygame.display.flip()
         
-    pygame.quit()
+    
     
     
 def game_over(score):
-    pygame.init()
     screen=pygame.display.set_mode((width,height))
     pygame.display.set_caption('Color Valley')
     font=pygame.font.Font(None,40)  
@@ -213,11 +216,15 @@ def game_over(score):
     retry=view.retry()
     
     end=True
+    
+    
     while end:
         r=screen.blit(retry, (136,410))
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 end=False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button==1:
                 pos=pygame.mouse.get_pos()
                 if r.collidepoint(pos):
@@ -230,11 +237,8 @@ def game_over(score):
         screen.blit(scoreFinal,(250,250,400,400))
         
         pygame.display.flip()
-        
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
     
-    pygame.quit()
+    
     
     
     
