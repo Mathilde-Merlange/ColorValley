@@ -93,8 +93,30 @@ def obst_carre():
     pygame.draw.line(carre_surf,PURPLE,(0,0),(0,125),20)
     pygame.draw.line(carre_surf,BLUE,(0,125),(125,125),20)
     pygame.draw.line(carre_surf,YELLOW,(125,0),(125,125),20)
-
     return carre_surf
+    
+
+def obst_ligne(dec):
+    colorBarre=[RED,RED,RED,BLUE,BLUE,BLUE,YELLOW,YELLOW,YELLOW,PURPLE,PURPLE,PURPLE]
+    
+    ligne_surf=pygame.Surface((400,30))
+    #ligne_surf.fill((N))
+    #ligne_surf.set_colorkey((N))
+    
+    pygame.draw.line(ligne_surf, colorBarre[(0+dec)%12],(0,0),(33,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(1+dec)%12], (34,0),(66,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(2+dec)%12], (67,0),(100,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(3+dec)%12], (101,0),(133,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(4+dec)%12],(134,0),(166,0),20)## collision
+    pygame.draw.line(ligne_surf, colorBarre[(5+dec)%12], (167,0),(200,0),20)##collision
+    pygame.draw.line(ligne_surf, colorBarre[(6+dec)%12], (201,0),(233,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(7+dec)%12], (234,0),(266,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(8+dec)%12],(267,0),(300,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(9+dec)%12], (301,0),(333,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(10+dec)%12], (334,0),(366,0),20)
+    pygame.draw.line(ligne_surf, colorBarre[(11+dec)%12], (367,0),(400,0),20)
+    return ligne_surf
+
 
 def play():
     play=pygame.image.load("play.png")

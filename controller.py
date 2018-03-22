@@ -80,12 +80,17 @@ def jeu():
 
     clock=pygame.time.Clock()
     
+    
     y=500
     y_init=500
     y_max=500
     i=0.0
     color_init=model.newColor()
     init_balle(color_init)
+
+    k=view.obst_ligne(12)    ##colision nécessaire  (à lieu entre 190 et 210)+ inlure dans le jeu 
+
+    
     cercle_change_color()
    
     angle = 0
@@ -166,7 +171,7 @@ def jeu():
 
     
 
-
+        screen.blit(k,(0,0,400,600))
         pygame.display.flip()
 
    
@@ -197,8 +202,7 @@ def menu():
                 pos=pygame.mouse.get_pos()
                 if b.collidepoint(pos):
                     jeu()
-        
-        
+                
         pygame.display.flip()
         
     
