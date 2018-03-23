@@ -183,7 +183,14 @@ def score_add(score):
     score+=1
     return score
         
-
+def coll_ligne(balle,ligne,c5,c6,colorBalle):
+	if (c5!=c6) and collision(balle,ligne):
+		return True
+	else:
+		if (c5!=colorBalle) and collision(balle,ligne):
+			return True
+		if (c5==colorBalle) and collision(balle,ligne):
+			return False
 
 
 

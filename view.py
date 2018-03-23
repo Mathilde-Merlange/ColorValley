@@ -100,9 +100,8 @@ def obst_ligne(dec):
     colorBarre=[RED,RED,RED,BLUE,BLUE,BLUE,YELLOW,YELLOW,YELLOW,PURPLE,PURPLE,PURPLE]
     
     ligne_surf=pygame.Surface((400,30))
-    #ligne_surf.fill((N))
-    #ligne_surf.set_colorkey((N))
-    
+    ligne_surf.fill((N))
+    ligne_surf.set_colorkey((N))
     pygame.draw.line(ligne_surf, colorBarre[(0+dec)%12],(0,0),(33,0),20)
     pygame.draw.line(ligne_surf, colorBarre[(1+dec)%12], (34,0),(66,0),20)
     pygame.draw.line(ligne_surf, colorBarre[(2+dec)%12], (67,0),(100,0),20)
@@ -115,8 +114,20 @@ def obst_ligne(dec):
     pygame.draw.line(ligne_surf, colorBarre[(9+dec)%12], (301,0),(333,0),20)
     pygame.draw.line(ligne_surf, colorBarre[(10+dec)%12], (334,0),(366,0),20)
     pygame.draw.line(ligne_surf, colorBarre[(11+dec)%12], (367,0),(400,0),20)
+    getColor_ligne(colorBarre[(4+dec)%12],colorBarre[(5+dec)%12])
     return ligne_surf
+    
+def obst_ligne_rect():
+	ligne_surf=obst_ligne()
+	ligne_rect=ligne_surf.get_rect()
+	ligne_rect.center=(w/2,0)
+	return ligne_rect
+	
 
+def getColor_ligne(a,b):
+	c5=a
+	c6=b
+	return (c5,c6)
 
 def play():
     play=pygame.image.load("play.png")

@@ -17,6 +17,7 @@ continuer=1
 
 RED=(255,0,128)
 
+dec=12
 
 
 
@@ -53,8 +54,7 @@ def obst_carre(angle,x,y):
     rect_carre = rotated_surface.get_rect()
     rect_carre.center=(x,y)
     return rect_carre
-
-    
+        
 def cercle_change_color():
     global pie 
     global rect_pie
@@ -63,13 +63,10 @@ def cercle_change_color():
     rect_pie.center=(200,125)
 
 
-
 def pos_max_balle(y,y_max):
     if(y<y_max):
         y_max=y
     return y_max
-
-
 
 
 def jeu():
@@ -88,7 +85,7 @@ def jeu():
     color_init=model.newColor()
     init_balle(color_init)
 
-    k=view.obst_ligne(12)    ##colision nécessaire  (à lieu entre 190 et 210)+ inlure dans le jeu 
+    k=view.obst_ligne(dec)    ##colision nécessaire  (à lieu entre 190 et 210)+ inclure dans le jeu 
 
     
     cercle_change_color()
