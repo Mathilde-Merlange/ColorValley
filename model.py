@@ -27,13 +27,12 @@ def update_ball(surface):
 def newColor():
     colors=[BLUE,RED,YELLOW,PURPLE]
     c1=random.choice(colors)
-    print ("couleur balle = ",c1)
+    #print ("couleur balle = ",c1)
     return c1
 
 def couleur_arc_bas(i):
 
     col_bas=math.radians(270)
-    #col_haut=math.radians(90)
     
     x_P=math.radians(0)
     y_P=math.radians(90)
@@ -161,22 +160,22 @@ def collision(rectA,rectB):
         
 def coll_balle_obs_bas(balle,rect_obst,couleur_obst,colorBall):
     if (collision_bas(balle,rect_obst) and (colorBall==couleur_obst)):
-        print("collision")
+        #print("collision")
         return True
     else :
         if(collision_bas(balle,rect_obst) and (colorBall!=couleur_obst)):
-            print ("perdu")
+            #print ("perdu")
     
             return False
     return True
 
 def coll_balle_obs_haut(balle,rect_obst,couleur_obst,colorBall):
     if (collision_haut(balle,rect_obst) and (colorBall==couleur_obst)):
-        print("collision")
+        #print("collision")
         return True
     else :
         if(collision_haut(balle,rect_obst) and (colorBall!=couleur_obst)):
-            print ("perdu")
+            #print ("perdu")
             return False            
     return True
 def score_add(score):

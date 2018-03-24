@@ -17,7 +17,7 @@ continuer=1
 
 RED=(255,0,128)
 
-dec=12
+#dec=12
 
 
 
@@ -85,7 +85,7 @@ def jeu():
     color_init=model.newColor()
     init_balle(color_init)
 
-    k=view.obst_ligne(dec)    ##colision nécessaire  (à lieu entre 190 et 210)+ inclure dans le jeu 
+    #k=view.obst_ligne(dec)    ##colision nécessaire  (à lieu entre 190 et 210)+ inclure dans le jeu 
 
     
     cercle_change_color()
@@ -168,7 +168,7 @@ def jeu():
 
     
 
-        screen.blit(k,(0,0,400,600))
+        #screen.blit(k,(0,0,400,600))
         pygame.display.flip()
 
    

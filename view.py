@@ -8,7 +8,7 @@ BLUE=(53,226,242)
 YELLOW=(246,223,14)
 PURPLE=(140,19,251)
 
-#color1=RED
+
 N=(0,0,0)
 w=400
 h=600
@@ -124,7 +124,7 @@ def obst_ligne_rect():
 	return ligne_rect
 	
 
-def getColor_ligne(a,b):
+def getColor_ligne(a,b): #récupérer couleur des morceaux de la ligne impactés par une collision avec la balle
 	c5=a
 	c6=b
 	return (c5,c6)
