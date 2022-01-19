@@ -1,3 +1,3 @@
 # ColorValley
 
-Portage sous Python3 du jeu "Cross Color Valley"
+Programmation sous Python3 du jeu "Cross Color Valley"
